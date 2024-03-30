@@ -1,22 +1,26 @@
 import streamlit as st
 
-# Define a function to handle the chat messages
-def chat():
-    st.title("Streamlit Chat App")
-    st.markdown("Welcome to the chat app! Feel free to start a conversation.")
-    
-    # Create a text input for user messages
-    user_input = st.text_input("You:", "")
+st.title("Echo Bot")
 
-    # Create a button to send the message
-    if st.button("Send"):
-        # Display the user's message
-        st.write("You:", user_input)
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-        # You can add your own logic here to generate responses
-        # For simplicity, let's just echo the user's message as the response
-        st.write("Bot:", user_input)
+# Display chat messages from history on app rerun
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
 
-# Run the chat function
-if __name__ == "__main__":
-    chat()
+# React to user input
+if prompt := st.chat_input("What is up?"):
+    # Display user message in chat message container
+    st.chat_message("user").markdown(prompt)
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": prompt})
+
+    response = f"Echo: {prompt}"
+    # Display assistant response in chat message container
+    with st.chat_message("assistant"):
+        st.markdown(response)
+    # Add assistant response to chat history
+    st.session_state.messages.append({"role": "assistant", "content": response})
