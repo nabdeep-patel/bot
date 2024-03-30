@@ -72,3 +72,11 @@ def footer():
         link("https://bigganblog.org/2021/03/গতির-সমীকরণ", image('https://raw.githubusercontent.com/rafisics/suvat_calculator/main/img/bigganblog_badge_black_white.png',)),
     ]
     layout(*myargs)
+hide_streamlit_style = """
+<style>
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+</style>
+
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
