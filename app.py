@@ -7,13 +7,6 @@ def chat_with_gemini(prompt):
   # Initialize GenerateTextRequest object
   request = GenerateTextRequest(
       prompt=TextPrompt(text=prompt),
-      max_characters=2048,
-
-      
-def chat_with_gemini(prompt):
-  # Initialize GenerateTextRequest object
-  request = GenerateTextRequest(
-      prompt=TextPrompt(text=prompt),
       max_characters=2048,  # Adjust character limit as needed
   )
   client = genai.Client(api_key=st.secrets["genainp"])
